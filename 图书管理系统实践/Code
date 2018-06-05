@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
-typedef struct LNode
+typedef struct LNode//定义书的结构体；
 {
 	char BookISBN[13];
 	char BookName[20];
 	double BookPrice;
 	LNode *next;
 }LNode, *LinkList;
-//表的创建和输出，表的修改，最贵图书的查找，新书入库，旧书出库，**表的排序，**表的逆序存储；
+//表的创建和输出，表的修改，最贵图书的查找，新书入库，旧书出库；
 
 int main()
 {
@@ -34,14 +34,15 @@ int main()
 		case(3):DeleteList(Head); break;
 		case(4):SearchList(Head); break;
 		case(5):PrintList(Head); break;
-		default:cout << "请重新输入" << endl; break;
+		default:cout << "请重新输入" << endl; 
+		break;
 		}
 	}
 	system("pause");
 	return 0;
 }
 
-void PrintMenu()
+void PrintMenu()//目录的建立；
 {
 	cout << "					    ---菜单---" << endl;
 	cout << "					1.图书信息表的创建和入库" << endl;
@@ -96,7 +97,7 @@ void DeleteList(LinkList &L)
 	int j = 0;
 	LinkList p = NULL, q = NULL;
 	p = L;
-	while ((p->next) && (j<BookNumber - 1))
+	while ((p->next) && (j<BookNumber - 1))//用于定位要删除的元素；
 	{
 		p = p->next;
 		j++;
@@ -119,9 +120,7 @@ void SearchList(LinkList L)
 	while (p != NULL)
 	{
 		if ((p->BookPrice) > (MAXPRICE->BookPrice))
-		{
-			MAXPRICE = p;
-		}
+			MAXPRICE = p;//如果下一个数据大于前一个，将地址付给新的指针；
 		p = p->next;
 	}
 	cout << "这本书是：" << endl;
@@ -138,7 +137,7 @@ void ChangeList(LinkList &L)
 	int BookNumber;
 	cout << "请输入你要修改第几本书：";
 	cin >> BookNumber;
-	while (p && (j<BookNumber - 1))
+	while (p && (j<BookNumber - 1))//定位要修改的元素，并将其指针赋给新的指针；
 	{
 		p = p->next;
 		++j;
@@ -149,7 +148,7 @@ void ChangeList(LinkList &L)
 		cout << "修改错误";
 	}
 	cout << "请输入书的ISBN号码/书名/价格" << endl;
-	cin >> q->BookISBN;
+	cin >> q->BookISBN;//修改指针所指的元素的值；
 	cin >> q->BookName;
 	cin >> q->BookPrice;
 	cout << "修改完毕！" << endl;
