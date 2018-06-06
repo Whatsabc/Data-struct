@@ -103,6 +103,9 @@ void MinSpanTree_Kruskal(AMGraph G)
 {
 	Sort(Edge);
 	Sort(Edge);//将辅助数组Edge中的元素按权值大小从小到大排序；
+		Vexset[i]=i;
+	for(i=0;i<G.arcnum;i++)//依次查看数组Edge中的边；
+	{
 		v1=LocateVex(G,Edge[i].Head);//v1为边始边Head的下标;
 		v2=LocateVex(G.Edge[i].Tail);//v2为边的终点Tail的下标；
 		vs1=Vexset[v1];//获取边Edge[i]的始边所在的连通分量vs1;
