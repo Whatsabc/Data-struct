@@ -1,4 +1,4 @@
-﻿#include<iostream>
+#include<iostream>
 #include<string.h>
 #define YES 1
 #define NO -1

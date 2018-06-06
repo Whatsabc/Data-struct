@@ -1,4 +1,4 @@
-﻿//邻接表的生成；
+//邻接表的生成；
 #include<stdio.h>
 using namespace std;
 #define MVNum 100//最大顶点数；
