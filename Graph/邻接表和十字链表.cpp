@@ -101,8 +101,8 @@ int Vexset[MVNum];
 
 void MinSpanTree_Kruskal(AMGraph G)
 {
-	Sort(Edge);
 	Sort(Edge);//将辅助数组Edge中的元素按权值大小从小到大排序；
+	for(i=0;i<G.vexnum;i++)//辅助数组，表示各顶点自成一个连通分量；
 		Vexset[i]=i;
 	for(i=0;i<G.arcnum;i++)//依次查看数组Edge中的边；
 	{
