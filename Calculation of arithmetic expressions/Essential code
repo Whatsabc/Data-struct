@@ -112,7 +112,7 @@ double EvaluateExpression(char* e)//进行运算的主函数；
 
 void CPush(LinkCharStack &s, char c)//使算符c进入算符栈；
 {
-	LinkCharStack p = new CharStackNode;
+	LinkCharStack p = new CharStackNode;//开辟一个新空间；
 	p->data = c;
 	p->next = s;
 	s = p;
