@@ -102,4 +102,19 @@ int Vexset[MVNum];
 void MinSpanTree_Kruskal(AMGraph G)
 {
 	Sort(Edge);
+	Sort(Edge);//将辅助数组Edge中的元素按权值大小从小到大排序；
+		v1=LocateVex(G,Edge[i].Head);//v1为边始边Head的下标;
+		v2=LocateVex(G.Edge[i].Tail);//v2为边的终点Tail的下标；
+		vs1=Vexset[v1];//获取边Edge[i]的始边所在的连通分量vs1;
+		vs2=Vexset[v2];//获取边Edge[i]的始边所在的连通分量vs2;
+		if(vs1!=vs2)//边的两个顶点分属不同的连通分量；
+		{
+			cout<<Edge[i].Head<<Edge[i].Tail;
+			for(j=0;j<G.vexnum;j++)//合并vs1,vs2l两个分量，即两个集合统一编号；
+				if(Vexset[j]==vs2)//编号集合为vs2的都改为vs1;
+					Vexset[j]=vs1;
+		}	
+	}
+}
+		
 	
