@@ -1,4 +1,4 @@
-﻿//深度优先搜索遍历连通图
+//深度优先搜索遍历连通图
 bool visted[MVNum];
 void DFS(Graph G,int v)
 {

@@ -1,4 +1,4 @@
-﻿#include<iostream>
+#include<iostream>
 using namespace std;
 #define MaxInt 32767
 #define MVNum 100
