@@ -24,24 +24,27 @@ void PrintHuffmanCode(HuffmanCode HC,char ch[]);//打印每个字符的哈夫曼
 
 int main()
 {
-	char Cinstring[100];//储存字符串的数组；
-	int Chartypenum;//统计字符串长度；
-	int HTNum, i = 0;
-	HuffmanTree HT;
-	HuffmanCode HC;
-	cout << "请输入一串字符：" << endl;
-	cin >> Cinstring;
-	Chartypenum=CountNum(Cinstring);//返回数值得到字符串长度；
-	CreateHuffmanTree(HT, Chartypenum);//构建树；
-	CreateHuffmanCode(HT,HC,Chartypenum);//构建哈夫曼树的编码；
-	PrintHuffmanCode(HC, Cinstring);//打印每个字母哈夫曼编码；
-	while (Cinstring[i] != '\0')//进行全部哈夫曼编码的输出；[需要认真看]
+	while(1)
 	{
-		cout << HC[Cinstring[i] - 'a' + 1];
-		i++;
+		char Cinstring[100];//储存字符串的数组；
+		int Chartypenum;//统计字符串长度；
+		int HTNum, i = 0;
+		HuffmanTree HT;
+		HuffmanCode HC;
+		cout << "请输入一串字符：" << endl;
+		cin >> Cinstring;
+		Chartypenum=CountNum(Cinstring);//返回数值得到字符串长度；
+		CreateHuffmanTree(HT, Chartypenum);//构建树；
+		CreateHuffmanCode(HT,HC,Chartypenum);//构建哈夫曼树的编码；
+		PrintHuffmanCode(HC, Cinstring);//打印每个字母哈夫曼编码；
+		while (Cinstring[i] != '\0')//进行全部哈夫曼编码的输出；[需要认真看]
+		{
+			cout << HC[Cinstring[i] - 'a' + 1];
+			i++;
+		}
+		cout << endl;
+		cout << Cinstring<<endl;//将字符串输出；以后改进；
 	}
-	cout << endl;
-	cout << Cinstring<<endl;//将字符串输出；以后改进；
 	system("pause");
 	return 0;
 }
@@ -95,7 +98,7 @@ void Select(HuffmanTree HT, int n,int &s1,int &s2)//自己写的总是错的，�
 	}
 	h2 = HT[2];
 	h2.weight = 999999;
-	for (i = 2; i <= n; i++)
+	for (i = 1; i <= n; i++)
 	{
 		if ((HT[i].weight <= h2.weight) && (ti1!=i) && (HT[i].parent == 0))
 		{
