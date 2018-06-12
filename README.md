@@ -1,3 +1,3 @@
 # Data-struct
-//这个库主要是用于数据结构课程练习使用；
-//编译环境VS2017；
+This library is mainly used for data structure practice;
+Compile environment:Visual Stdio 2017;
