@@ -8,7 +8,7 @@ typedef struct BSNode {
 }BSNode, *BSTree;
 //函数定义开始；
 BSTree SearchBST(BSTree T, ElemType key);//二叉排序树的递归查找；
-										 //void InsertBST(BSTree &T, ElemType e);//二叉排序树的插入；
+void InsertBST(BSTree &T, ElemType e);//二叉排序树的插入；
 void CreateBST(BSTree &T);//创建二叉排序树；
 void PreOrderTraverse(BSTree T);//对二叉排序树进行先序遍历；
 void MidOrderTraverse(BSTree T);//对二叉树进行中序遍历；
@@ -16,7 +16,7 @@ void PostOrderTraverse(BSTree T);//对二叉树进行后序遍历；
 BSTree SearchMin(BSTree T);//二叉树找到最小值；
 BSTree SearchMax(BSTree T);//二叉树找到最大值；
 void DeleteBSTNode(BSTree &T, ElemType data);//删除节点代码；
-											 //主函数开始；
+//主函数开始；
 int main()
 {
 	BSTree T = NULL;
