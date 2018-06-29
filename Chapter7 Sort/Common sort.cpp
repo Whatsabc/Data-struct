@@ -7,17 +7,27 @@ typedef struct {
 	KeyType key;
 	int otherinfo;
 }RedType;
+
 typedef struct SqList{
 	RedType r[MAXSIZE + 1];//r[0]闲置用作哨兵单元；
 	int length=0;
 }SqList,*SqListLink;
 int dt[3] = { 5,3,1 };
 //函数定义开始；
-void InsertSort(SqListLink &L);//直接插入排序；
-void BInsertSort(SqListLink &L);//折半插入排序；
+void PrintList(SqListLink L);
+//直接插入排序；
+void InsertSort(SqListLink &L);
+//折半插入排序；
+void BInsertSort(SqListLink &L);
+//希尔排序；
 void ShellInsert(SqListLink &L, int dk);
 void ShellSort(SqListLink &L, int dt[], int t);
+//冒泡法排序；
 void BubbleSort(SqListLink &L);
+//快速排序；
+int Partition(SqListLink &L, int low, int high);
+void QSort(SqListLink &L, int low, int high);
+void QuickSort(SqListLink &L);
 
 int main()
 {
@@ -32,30 +42,41 @@ int main()
 	SqListLink BInsertL = InsertL;
 	SqListLink Shell = InsertL;
 	SqListLink Bubble = InsertL;
+	SqListLink	QuickL = InsertL;
 	InsertSort(InsertL);
 	BInsertSort(BInsertL);
 	ShellSort(Shell,dt,3);
-	for (i = 1; i <= Shell->length; i++)
-		cout << Shell->r[i].key << " ";
+	PrintList(Shell);
 	cout << endl;
 	BubbleSort(Bubble);
+	QuickSort(QuickL);
+	cout << endl;
 	system("pause");
 	return 0;
+}
+
+void PrintList(SqListLink L)
+{
+	int i;
+	for (i = 1; i <= L->length; i++)
+		cout << L->r[i].key << " ";
 }
 
 void InsertSort(SqListLink &L)
 {
 	int i, j;
-	for (i = 1; i <= L->length; i++)
+	for (i = 2; i <= L->length; i++)
 	{
-		L->r[0] = L->r[i];//将带插入的元素保存到首位；
-		L->r[i] = L->r[i - 1];
-		for (j = i - 1; L->r[0].key < L->r[j].key; j--)
-			L->r[j + 1] = L->r[j];
-		L->r[j + 1] = L->r[0];
+		if (L->r[i].key < L->r[i - 1].key)//满足条件，需要将r[i]插入到有序子列；
+		{
+			L->r[0] = L->r[i];//将带插入的元素保存到首位；
+			L->r[i] = L->r[i - 1];//依次将元素后移；
+			for (j = i - 2; L->r[0].key < L->r[j].key; j--)//从后向前寻找插入位置；
+				L->r[j + 1] = L->r[j];//记录逐个后移；
+			L->r[j + 1] = L->r[0];//将r[0]还原到r[i]，插入到正确的位置；
+		}
 	}
-	for (i = 1; i <= L->length; i++)
-		cout << L->r[i].key << " ";
+	PrintList(L);
 	cout << endl;
 }
 
@@ -80,8 +101,7 @@ void BInsertSort(SqListLink & L)
 			L->r[j + 1] = L->r[j];
 		L->r[high + 1] = L->r[0];
 	}
-	for (i = 1; i <= L->length; i++)
-		cout << L->r[i].key << " ";
+	PrintList(L);
 	cout << endl;
 }
 
@@ -124,7 +144,41 @@ void BubbleSort(SqListLink & L)
 			}
 		m--;
 	}
-	for (i = 1; i <= L->length; i++)
-		cout << L->r[i].key << " ";
+	PrintList(L);
 	cout << endl;
+}
+//快速排序；
+int Partition(SqListLink & L, int low, int high)
+{
+	L->r[0] = L->r[low];//用子表的第一个数字用作枢纽记录；
+	int pivotekey;//定义枢纽记录关键字；
+	pivotekey = L->r[low].key;
+	while (low < high)
+	{
+		while (low < high&&L->r[high].key >= pivotekey)
+			high--;
+		L->r[low] = L->r[high];//将比枢纽小的记录移动到低端；
+		while (low < high&&L->r[low].key <= pivotekey)
+			low++;
+		L->r[high] = L->r[low];//将比枢纽大的记录移动到高端；
+	}
+	L->r[low] = L->r[0];//枢纽记录到位；
+	return low;//返回枢纽数值；
+}
+
+void QSort(SqListLink &L, int low, int high)
+{
+	int pivotekey;
+	if (low < high)
+	{
+		pivotekey = Partition(L, low, high);//得到枢纽位置；
+		QSort(L, low, pivotekey - 1);//对左子树进行递归排序；
+		QSort(L, pivotekey + 1, high);//对右子树进行递归排序；
+	}
+}
+
+void QuickSort(SqListLink &L)
+{
+	QSort(L, 1, L->length);
+	PrintList(L);
 }
