@@ -83,6 +83,7 @@ int CountNum(char ch[])
 }
 
 void Select(HuffmanTree HT, int n,int &s1,int &s2)//自己写的总是错的，上网借鉴；
+{
 	int i, ti1,ti2;
 	HTNode h1, h2;
 	ti1 = ti2 = 0;
