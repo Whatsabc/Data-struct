@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 typedef struct LNode//定义书的结构体；
 {
 	char BookISBN[13];
