@@ -14,6 +14,6 @@
 
 1、和根节点9比较
 
-![avatar](https://github.com/whatsabc/data-structure-practice/blob/master/4treeandbinarytree/AVLtree/img/1.jpg)
+![avatar](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/1.jpg?raw=true)
 
-
+![avatar](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/2.jpg?raw=true)
