@@ -10,7 +10,7 @@
 
 例如：
 
-![avatar](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/1.jpg?raw=true)
+![图1](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/1.jpg?raw=true)
 
 这种数据结构可以让我们快速找到想要查找的值。
 
@@ -95,3 +95,94 @@
 
 > 左旋
 
+左旋和右旋一样，就是用来解决当大部分节点都偏向右边的时候，通过左旋来还原。例如：
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/15.jpg?raw=true)
+
+我们把这种倾向于右边的情况称之为 **右-右型**。
+
+我也找了一张动图。
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/16.gif?raw=true)
+
+初始状态如下：
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/17.jpg?raw=true)
+
+然后我们主键插入如下数值：1,4,5,6,7,10,9,8
+
+插入 1
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/18.jpg?raw=true)
+
+左-左型，需要右旋调整。
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/19.jpg?raw=true)
+
+插入4
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/20.jpg?raw=true)
+
+继续插入 5
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/21.jpg?raw=true)
+
+右-右型，需要左旋转调整。
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/22.jpg?raw=true)
+
+继续插入6
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/23.jpg?raw=true)
+
+右-右型，需要进行左旋
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/24.jpg?raw=true)
+
+继续插入7
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/25.jpg?raw=true)
+
+右-右型，需要进行左旋
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/26.jpg?raw=true)
+
+继续插入10
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/27.jpg?raw=true)
+
+继续插入9
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/28.jpg?raw=true)
+
+出现了这种情况怎么办呢?对于这种  **右-左型** 的情况，单单一次左旋或右旋是不行的，下面我们先说说如何处理这种情况。
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/29.jpg?raw=true)
+
+这种我们就把它称之为 **右-左 型**吧。处理的方法是**先对节点10进行右旋把它变成右-右型。**
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/30.jpg?raw=true)
+
+然后在进行左旋。
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/31.jpg?raw=true)
+
+所以对于这种 **右-左型的，我们需要进行一次右旋再左旋**。
+
+同理，也存在 **左-右型**的，例如：
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/32.jpg?raw=true)
+
+对于左-右型的情况和刚才的 右-左型相反，我们需要对它进行一次左旋，再右旋。
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/33.jpg?raw=true)
+
+回到刚才那道题
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/34.jpg?raw=true)
+
+对它进行右旋再左旋。
+
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/35.jpg?raw=true)
+
+到此，我们的插入就结束了。
