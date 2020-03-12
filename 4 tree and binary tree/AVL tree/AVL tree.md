@@ -61,9 +61,7 @@
 
 ![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/9.jpg?raw=true)
 
-对于图二，因为节点9的左孩子高度为2，而右孩子高度为0。他们之间的差值超过1了。
-
-这种树就可以保证不会出现大量节点偏向于一边的情况了。
+对于图二，因为节点9的左孩子高度为2，而右孩子高度为0。他们之间的差值超过1了。这种树就可以保证不会出现大量节点偏向于一边的情况了。
 
 可以对于图1，如果我们要插入一个节点3，按照查找二叉树的特性，我们只能把3作为节点4的左子树插进去，可是插进去之后，又会破坏了AVL树的特性，那我们那该怎么弄？
 
@@ -104,6 +102,8 @@
 我也找了一张动图。
 
 ![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/16.gif?raw=true)
+
+### 2 一个实例，覆盖了所有情况
 
 初始状态如下：
 
@@ -159,7 +159,7 @@
 
 ![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/29.jpg?raw=true)
 
-这种我们就把它称之为 **右-左 型**吧。处理的方法是**先对节点10进行右旋把它变成右-右型。**
+这种称之为右-左型。处理的方法是**先对节点10进行右旋把它变成右-右型。**
 
 ![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/30.jpg?raw=true)
 
@@ -186,3 +186,133 @@
 ![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/AVL%20tree/img/35.jpg?raw=true)
 
 到此，我们的插入就结束了。
+
+### 3 总结
+
+在插入的过程中，会出现一下四种情况破坏AVL树的特性，我们可以采取如下相应的旋转。
+
+1、左-左型：做右旋。
+
+2、右-右型：做左旋转。
+
+3、左-右型：先做左旋，后做右旋。
+
+4、右-左型：先做右旋，再做左旋。
+
+### 4 代码实现
+
+```java
+//定义节点
+class AvlNode {
+	int data;
+	AvlNode lchild;//左孩子
+	AvlNode rchild;//右孩子
+	int height;//记录节点的高度
+}
+
+//在这里定义各种操作
+public class AVLTree{
+	//计算节点的高度
+	static int height(AvlNode T) {
+		if (T == null) {
+			return -1;
+		}else{
+			return T.height;
+		}
+	}
+
+	//左左型，右旋操作
+	static AvlNode R_Rotate(AvlNode K2) {
+		AvlNode K1;
+		
+		//进行旋转
+		K1 = K2.lchild;
+		K2.lchild = K1.rchild;
+		K1.rchild = K2;
+
+		//重新计算节点的高度
+		K2.height = Math.max(height(K2.lchild), height(K2.rchild)) + 1;
+		K1.height = Math.max(height(K1.lchild), height(K1.rchild)) + 1;
+
+		return K1;
+	}
+
+	//进行左旋
+	static AvlNode L_Rotate(AvlNode K2) {
+		AvlNode K1;
+
+		K1 = K2.rchild;
+		K2.rchild = K1.lchild;
+		K1.lchild = K2;
+
+		//重新计算高度
+		K2.height = Math.max(height(K2.lchild), height(K2.rchild)) + 1;
+		K1.height = Math.max(height(K1.lchild), height(K1.rchild)) + 1;
+
+		return K1;
+	}
+
+	//左-右型，进行右旋，再左旋
+	static AvlNode R_L_Rotate(AvlNode K3) {
+		//先对其孩子进行左旋
+		K3.lchild = R_Rotate(K3.lchild);
+		//再进行右旋
+		return L_Rotate(K3);
+	}
+
+	//右-左型，先进行左旋，再右旋
+	static AvlNode L_R_Rotate(AvlNode K3) {
+		//先对孩子进行左旋
+		K3.rchild = L_Rotate(K3.rchild);
+		//在右旋
+		return R_Rotate(K3);
+	}
+
+	//插入数值操作
+	static AvlNode insert(int data, AvlNode T) {
+		if (T == null) {
+			T = new AvlNode();
+			T.data = data;
+			T.lchild = T.rchild = null;
+		} else if(data < T.data) {
+			//向左孩子递归插入
+			T.lchild = insert(data, T.lchild);
+			//进行调整操作
+			//如果左孩子的高度比右孩子大2
+			if (height(T.lchild) - height(T.rchild) == 2) {
+				//左-左型
+				if (data < T.lchild.data) {
+					T = R_Rotate(T);
+				} else {
+					//左-右型
+					T = R_L_Rotate(T);
+				}
+			}
+		} else if (data > T.data) {
+			T.rchild = insert(data, T.rchild);
+			//进行调整
+			//右孩子比左孩子高度大2
+			if(height(T.rchild) - height(T.lchild) == 2)
+				//右-右型
+			if (data > T.rchild.data) {
+				T = L_Rotate(T);
+			} else {
+				T = L_R_Rotate(T);
+			}
+		}
+		//否则，这个节点已经在书上存在了，我们什么也不做
+       
+		//重新计算T的高度
+		T.height = Math.max(height(T.lchild), height(T.rchild)) + 1;
+		return T;
+	}
+}
+```
+
+### AVL树效率
+
+查找节点：时间复杂度为O(logN)
+
+插入节点：因为需要先查找到节点，然后进行旋转平衡操作（基本为1），所以也为O(logN)
+
+删除节点：再查找到节点之后，还需要检查从删除节点到根节点的平衡因子，所以时间复杂度为O(logN)
