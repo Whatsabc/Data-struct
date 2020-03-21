@@ -29,23 +29,23 @@ B树也称B-树,它是一颗多路平衡查找树。二叉树我想大家都不�
 
 - 插入18，70，50,40
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\1.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/1.jpg?raw=true)
 
 - 插入22
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\2.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/2.jpg?raw=true)
 
 插入22时，发现这个节点的关键字已经大于4了，所以需要进行分裂，分裂的规则在上面已经讲了，分裂之后，如下。
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\3.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/3.jpg?raw=true)
 
 - 接着插入23，25，39
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\4.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/4.jpg?raw=true)
 
 分裂，得到下面的。
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\5.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/5.jpg?raw=true)
 
 更过的插入的过程就不多介绍了，相信有这个例子你已经知道怎么进行插入操作了。
 
@@ -55,35 +55,35 @@ B树的删除操作相对于插入操作是相对复杂一些的，但是，你�
 
 - 现在有一个初始状态是下面这样的B树，然后进行删除操作。
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\6.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/6.jpg?raw=true)
 
 - 删除15，这种情况是删除叶子节点的元素，如果删除之后，节点数还是大于`m/2`，这种情况只要直接删除即可。
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\7.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/7.jpg?raw=true)
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\8.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/8.jpg?raw=true)
 
 - 接着，我们把22删除，这种情况的规则：22是非叶子节点，**对于非叶子节点的删除，我们需要用后继key（元素）覆盖要删除的key，然后在后继key所在的子支中删除该后继key**。对于删除22，需要将后继元素24移到被删除的22所在的节点。
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\9.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/9.jpg?raw=true)
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\10.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/10.jpg?raw=true)
 
 此时发现26所在的节点只有一个元素，小于2个（m/2），这个节点不符合要求，这时候的规则（向兄弟节点借元素）：**如果删除叶子节点，如果删除元素后元素个数少于（m/2），并且它的兄弟节点的元素大于（m/2），也就是说兄弟节点的元素比最少值m/2还多，将先将父节点的元素移到该节点，然后将兄弟节点的元素再移动到父节点**。这样就满足要求了。
 
 我们看看操作过程就更加明白了。
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\11.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/11.jpg?raw=true)
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\12.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/12.jpg?raw=true)
 
 - 接着删除28，**删除叶子节点**，删除后不满足要求，所以，我们需要考虑向兄弟节点借元素，但是，兄弟节点也没有多的节点（2个），借不了，怎么办呢？如果遇到这种情况，**首先，还是将先将父节点的元素移到该节点，然后，将当前节点及它的兄弟节点中的key合并，形成一个新的节点**。
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\13.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/13.jpg?raw=true)
 
 移动之后，跟兄弟节点合并。
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\14.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/14.jpg?raw=true)
 
 删除就只有上面的几种情况，根据不同的情况进行删除即可。
 
@@ -107,7 +107,7 @@ B+树其实和B树是非常相似的，我们首先看看**相同点**。
 
 下面我们看一个B+树的例子，感受感受它吧！
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\15.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/15.jpg?raw=true)
 
 #### 2.2 插入操作
 
@@ -117,17 +117,17 @@ B+树其实和B树是非常相似的，我们首先看看**相同点**。
 
 - 插入5，10，15，20
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\16.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/16.jpg?raw=true)
 
 - 插入25，此时元素数量大于4个了，分裂
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\17.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/17.jpg?raw=true)
 
 - 接着插入26，30，继续分裂
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\18.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/18.jpg?raw=true)
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\19.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/19.jpg?raw=true)
 
 有了这几个例子，相信插入操作没什么问题了，下面接着看看删除操作。
 
@@ -137,19 +137,19 @@ B+树其实和B树是非常相似的，我们首先看看**相同点**。
 
 - 初始状态
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\20.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/20.jpg?raw=true)
 
 - 删除10，删除后，不满足要求，发现左边兄弟节点有多余的元素，所以去借元素，最后，修改父节点索引
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\21.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/21.jpg?raw=true)
 
 - 删除元素5，发现不满足要求，并且发现左右兄弟节点都没有多余的元素，所以，可以选择和兄弟节点合并，最后修改父节点索引
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\22.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/22.jpg?raw=true)
 
 - 发现父节点索引也不满足条件，所以，需要做跟上面一步一样的操作
 
-![img](E:\Github\data-structure-practice\4 tree and binary tree\Btree\img\23.jpg)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/4%20tree%20and%20binary%20tree/Btree/img/23.jpg?raw=true)
 
 这样，B+树的删除操作也就完成了，是不是看完之后，觉得非常简单！
 
