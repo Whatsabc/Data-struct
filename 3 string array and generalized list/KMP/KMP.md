@@ -1,3 +1,5 @@
+> 以下摘自阮一峰的[字符串匹配的KMP算法](http://www.ruanyifeng.com/blog/2013/05/Knuth–Morris–Pratt_algorithm.html)。
+
 ## 一：背景
 
 给定一个主串（以 S 代替）和模式串（以 P 代替），要求找出 P 在 S 中出现的位置，此即串的模式匹配问题。
@@ -51,8 +53,6 @@ int NaiveStringSearch(string S, string P)
 ## 三：KMP字符串匹配算法
 
 ### 3.1 算法流程
-
-以下摘自阮一峰的[字符串匹配的KMP算法](http://www.ruanyifeng.com/blog/2013/05/Knuth–Morris–Pratt_algorithm.html)，并作稍微修改。
 
 （1）
 
@@ -159,7 +159,7 @@ next 数组的求解基于“真前缀”和“真后缀”，即`next[i]`等于
 
 思路如此简单，接下来就是代码实现了，如下：
 
-```c
+```cpp
 /* P 为模式串，下标从 0 开始 */
 void GetNext(string P, int next[])
 {
@@ -182,15 +182,15 @@ void GetNext(string P, int next[])
 }
 ```
 
-一脸懵逼，是不是。。。上述代码就是用来求解模式串中每个位置的`next[]`值。
+上述代码就是用来求解模式串中每个位置的`next[]`值。
 
 下面具体分析，我把代码分为两部分来讲：
 
-**（1）：i 和 j 的作用是什么？**
+**（1）i 和 j 的作用是什么？**
 
 i 和 j 就像是两个”指针“，一前一后，通过移动它们来找到最长的相同真前后缀。
 
-**（2）：if...else...语句里做了什么？**
+**（2）if...else...语句里做了什么？**
 
 ![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/14.jpg?raw=true)
 
