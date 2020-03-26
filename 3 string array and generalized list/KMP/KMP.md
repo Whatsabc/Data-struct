@@ -6,7 +6,7 @@ Knuth-Morris-Pratt 算法（简称 KMP）是解决这一问题的常用算法之
 
 在继续下面的内容之前，有必要在这里介绍下两个概念：**真前缀** 和 **真后缀**。
 
-![img](https://segmentfault.com/img/remote/1460000021457885)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/1.jpg?raw=true)
 
 由上图所得， "真前缀"指除了自身以外，一个字符串的全部头部组合；"真后缀"指除了自身以外，一个字符串的全部尾部组合。（网上很多博客，应该说是几乎所有的博客，也包括我以前写的，都是“前缀”。严格来说，“真前缀”和“前缀”是不同的，既然不同，还是不要混为一谈的好！）
 
@@ -56,43 +56,43 @@ int NaiveStringSearch(string S, string P)
 
 （1）
 
-![img](https://segmentfault.com/img/remote/1460000021457884)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/2.jpg?raw=true)
 
 首先，主串"BBC ABCDAB ABCDABCDABDE"的第一个字符与模式串"ABCDABD"的第一个字符，进行比较。因为 B 与 A 不匹配，所以模式串后移一位。
 
 （2）
 
-![img](https://segmentfault.com/img/remote/1460000021457876)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/3.jpg?raw=true)
 
 因为 B 与 A 又不匹配，模式串再往后移。
 
 （3）
 
-![img](https://segmentfault.com/img/remote/1460000021457880)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/4.jpg?raw=true)
 
 就这样，直到主串有一个字符，与模式串的第一个字符相同为止。
 
 （4）
 
-![img](https://segmentfault.com/img/remote/1460000021457874)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/5.jpg?raw=true)
 
 接着比较主串和模式串的下一个字符，还是相同。
 
 （5）
 
-![img](https://segmentfault.com/img/remote/1460000021457883)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/6.jpg?raw=true)
 
 直到主串有一个字符，与模式串对应的字符不相同为止。
 
 （6）
 
-![img](https://segmentfault.com/img/remote/1460000021457882)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/7.jpg?raw=true)
 
 这时，最自然的反应是，将模式串整个后移一位，再从头逐个比较。这样做虽然可行，但是效率很差，因为你要把"搜索位置"移到已经比较过的位置，重比一遍。
 
 （7）
 
-![img](https://segmentfault.com/img/remote/1460000021457875)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/8.jpg?raw=true)
 
 一个基本事实是，当空格与 D 不匹配时，你其实是已经知道前面六个字符是"ABCDAB"。KMP 算法的想法是，设法利用这个已知信息，不要把"搜索位置"移回已经比较过的位置，而是继续把它向后移，这样就提高了效率。
 
@@ -107,31 +107,31 @@ int NaiveStringSearch(string S, string P)
 
 （9）
 
-![img](https://segmentfault.com/img/remote/1460000021457881)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/9.jpg?raw=true)
 
 已知空格与 D 不匹配时，前面六个字符"ABCDAB"是匹配的。根据跳转数组可知，不匹配处 D 的 next 值为 2，因此接下来**从模式串下标为 2 的位置开始匹配**。
 
 （10）
 
-![img](https://segmentfault.com/img/remote/1460000021457879)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/10.jpg?raw=true)
 
 因为空格与 Ｃ 不匹配，C 处的 next 值为 0，因此接下来模式串从下标为 0 处开始匹配。
 
 （11）
 
-![img](https://segmentfault.com/img/remote/1460000021457877)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/11.jpg?raw=true)
 
 因为空格与 A 不匹配，此处 next 值为 -1，表示模式串的第一个字符就不匹配，那么直接往后移一位。
 
 （12）
 
-![img](https://segmentfault.com/img/remote/1460000021457878)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/12.jpg?raw=true)
 
 逐位比较，直到发现 C 与 D 不匹配。于是，下一步从下标为 2 的地方开始匹配。
 
 （13）
 
-![img](https://segmentfault.com/img/remote/1460000021457887)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/13.jpg?raw=true)
 
 逐位比较，直到模式串的最后一位，发现完全匹配，于是搜索完成。
 
@@ -192,13 +192,13 @@ i 和 j 就像是两个”指针“，一前一后，通过移动它们来找到
 
 **（2）：if...else...语句里做了什么？**
 
-![img](https://segmentfault.com/img/remote/1460000021457888)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/14.jpg?raw=true)
 
 假设 i 和 j 的位置如上图，由`next[i] = j`得，也就是对于位置 i 来说，**区段 [0, i - 1] 的最长相同真前后缀分别是 [0, j - 1] 和 [i - j, i - 1]，即这两区段内容相同**。
 
 按照算法流程，`if (P[i] == P[j])`，则`i++; j++; next[i] = j;`；若不等，则`j = next[j]`，见下图：
 
-![img](https://segmentfault.com/img/remote/1460000021457886)
+![img](https://github.com/whatsabc/data-structure-practice/blob/master/3%20string%20array%20and%20generalized%20list/KMP/img/15.jpg?raw=true)
 
 `next[j]`代表 [0, j - 1] 区段中最长相同真前后缀的长度。如图，用左侧两个椭圆来表示这个最长相同真前后缀，即这两个椭圆代表的区段内容相同；同理，右侧也有相同的两个椭圆。所以 else 语句就是利用第一个椭圆和第四个椭圆内容相同来加快得到 [0, i - 1] 区段的相同真前后缀的长度。
 
@@ -215,58 +215,58 @@ using namespace std;
 /* P 为模式串，下标从 0 开始 */
 void GetNext(string P, int next[])
 {
-    int p_len = P.size();
-    int i = 0;   // P 的下标
-    int j = -1;  
-    next[0] = -1;
+	int p_len = P.size();
+	int i = 0;   // P 的下标
+	int j = -1;  
+	next[0] = -1;
 
-    while (i < p_len)
-    {
-        if (j == -1 || P[i] == P[j])
-        {
-            i++;
-            j++;
-            next[i] = j;
-        }
-        else
-            j = next[j];
-    }
+	while (i < p_len)
+	{
+		if (j == -1 || P[i] == P[j])
+		{
+			i++;
+			j++;
+			next[i] = j;
+		}
+		else
+			j = next[j];
+	}
 }
 
 /* 在 S 中找到 P 第一次出现的位置 */
 int KMP(string S, string P, int next[])
 {
-    GetNext(P, next);
+	GetNext(P, next);
 
-    int i = 0;  // S 的下标
-    int j = 0;  // P 的下标
-    int s_len = S.size();
-    int p_len = P.size();
+	int i = 0;  // S 的下标
+	int j = 0;  // P 的下标
+	int s_len = S.size();
+	int p_len = P.size();
 
-    while (i < s_len && j < p_len) // 因为末尾 '\0' 的存在，所以不会越界
-    {
-        if (j == -1 || S[i] == P[j])  // P 的第一个字符不匹配或 S[i] == P[j]
-        {
-            i++;
-            j++;
-        }
-        else
-            j = next[j];  // 当前字符匹配失败，进行跳转
-    }
+	while (i < s_len && j < p_len) // 因为末尾 '\0' 的存在，所以不会越界
+	{
+		if (j == -1 || S[i] == P[j])  // P 的第一个字符不匹配或 S[i] == P[j]
+		{
+			i++;
+			j++;
+		}
+		else
+			j = next[j];  // 当前字符匹配失败，进行跳转
+	}
 
-    if (j == p_len)  // 匹配成功
-        return i - j;
-    
-    return -1;
+	if (j == p_len)  // 匹配成功
+		return i - j;
+
+	return -1;
 }
 
 int main()
 {
-    int next[100] = { 0 };
+	int next[100] = { 0 };
 
-    cout << KMP("bbc abcdab abcdabcdabde", "abcdabd", next) << endl; // 15
+	cout << KMP("bbc abcdab abcdabcdabde", "abcdabd", next) << endl; // 15
     
-    return 0;
+	return 0;
 }
 ```
 
@@ -279,29 +279,29 @@ int main()
 
 以 3.2 的表格为例（已复制在上方），若在`i = 5`时匹配失败，按照 3.2 的代码，此时应该把`i = 1`处的字符拿过来继续比较，但是这两个位置的字符是一样的，都是`B`，既然一样，拿过来比较不就是无用功了么？这我在 3.2 已经解释过，之所以会这样是因为 KMP 还未优化。那怎么改写就可以解决这个问题呢？很简单。
 
-```
+```cpp
 /* P 为模式串，下标从 0 开始 */
 void GetNextval(string P, int nextval[])
 {
-    int p_len = P.size();
-    int i = 0;   // P 的下标
-    int j = -1;  
-    nextval[0] = -1;
+	int p_len = P.size();
+	int i = 0;   // P 的下标
+	int j = -1;  
+	nextval[0] = -1;
 
-    while (i < p_len)
-    {
-        if (j == -1 || P[i] == P[j])
-        {
-            i++;
-            j++;
+	while (i < p_len)
+	{
+		if (j == -1 || P[i] == P[j])
+		{
+			i++;
+			j++;
           
-            if (P[i] != P[j])
-                nextval[i] = j;
-            else
-                nextval[i] = nextval[j];  // 既然相同就继续往前找真前缀
-        }
-        else
-            j = nextval[j];
-    }
+			if (P[i] != P[j])
+				nextval[i] = j;
+			else
+				nextval[i] = nextval[j];  // 既然相同就继续往前找真前缀
+		}
+		else
+			j = nextval[j];
+	}
 }
 ```
